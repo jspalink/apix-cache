@@ -81,5 +81,33 @@ interface Adapter
      *                       forever or False if the key is non-existant.
      */
     public function getTtl($key);
+        
+    /**
+     * Increment the value of the specified key.  If the value of the key is not
+     * a number and cannot be converted to a number, this function will set the
+     * value to quantity parameter.  However, this function should fail if the
+     * key doesn't exist in the cache and should not create a new key=>value
+     * pair.
+     *
+     * @param  string    $key The name of the key.
+     * @param  int       $quantity The value to add to the existing item
+     * @return int|false Returns the new value of the cache item or False if the
+     *                       key is non-existant.
+     */
+    public function increment($key, $quantity=1);
+    
+    /**
+     * Decrement the value of the specified key.  If the value of the key is not
+     * a number and cannot be converted to a number, this function will set the
+     * value to quantity parameter.  However, this function should fail if the
+     * key doesn't exist in the cache and should not create a new key=>value
+     * pair.
+     *
+     * @param  string    $key The name of the key.
+     * @param  int       $quantity The value to subtract from the existing item
+     * @return int|false Returns the new value of the cache item or False if the
+     *                       key is non-existant.
+     */
+    public function decrement($key, $quantity=1);
 
 }

@@ -200,7 +200,7 @@ abstract class AbstractCache implements Adapter
         return $this->removePrefix($str, $this->options['prefix_key']);
     }
 
-   /**
+    /**
      * Returns the given string without the internal tag prefix.
      *
      * @param  string $str
@@ -210,5 +210,5 @@ abstract class AbstractCache implements Adapter
     {
         return $this->removePrefix($str, $this->options['prefix_tag']);
     }
-
+    
 }
