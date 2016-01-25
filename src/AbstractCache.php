@@ -211,4 +211,30 @@ abstract class AbstractCache implements Adapter
         return $this->removePrefix($str, $this->options['prefix_tag']);
     }
     
+    /**
+     * {@inheritdoc}
+     * 
+     * A generic definition will retrieve the value and perform the increment.
+     */
+    public function increment($key, $quantity=1, $initial=0, $ttl=null)
+    {
+        $value = $this->load($key);
+        $incremented = is_numeric($value) ? $value+$quantity : $initial+$quantity;
+        $success = $this->save($incremented, $key, null, $ttl);
+        if(!$success) {
+            return false;
+        }
+        return $incremented;
+    }
+    
+    /**
+     * {@inheritdoc}
+     * 
+     * A generic definition will retrieve the value and perform the decrement.
+     */
+    public function decrement($key, $quantity=1, $initial=0, $ttl=null)
+    {
+        return $this->increment($key, -$quantity, $initial, $ttl);
+    }
+    
 }

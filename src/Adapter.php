@@ -85,29 +85,31 @@ interface Adapter
     /**
      * Increment the value of the specified key.  If the value of the key is not
      * a number and cannot be converted to a number, this function will set the
-     * value to quantity parameter.  However, this function should fail if the
-     * key doesn't exist in the cache and should not create a new key=>value
-     * pair.
+     * value to quantity parameter.  If the key doesn't exist, set it to the
+     * sum of the initial parameter and the quantity parameter.
      *
      * @param  string    $key The name of the key.
      * @param  int       $quantity The value to add to the existing item
-     * @return int|false Returns the new value of the cache item or False if the
-     *                       key is non-existant.
+     * @param  int       $initial Initial value for the counter if it doesn't exist
+     * @param  int       $ttl  The time-to-live in seconds, if set to null the
+     *                       cache is valid forever.
+     * @return int       Returns the new value of the cache item.
      */
-    public function increment($key, $quantity=1);
+    public function increment($key, $quantity=1, $initial=0, $ttl=null);
     
     /**
      * Decrement the value of the specified key.  If the value of the key is not
      * a number and cannot be converted to a number, this function will set the
-     * value to quantity parameter.  However, this function should fail if the
-     * key doesn't exist in the cache and should not create a new key=>value
-     * pair.
+     * value to quantity parameter.  If the key doesn't exist, set it to the
+     * difference of the initial parameter and the quantity parameter.
      *
      * @param  string    $key The name of the key.
      * @param  int       $quantity The value to subtract from the existing item
-     * @return int|false Returns the new value of the cache item or False if the
-     *                       key is non-existant.
+     * @param  int       $initial Initial value for the counter if it doesn't exist
+     * @param  int       $ttl  The time-to-live in seconds, if set to null the
+     *                       cache is valid forever.
+     * @return int       Returns the new value of the cache item.
      */
-    public function decrement($key, $quantity=1);
+    public function decrement($key, $quantity=1, $initial=0, $ttl=null);
 
 }
